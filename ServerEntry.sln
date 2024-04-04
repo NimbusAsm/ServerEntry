@@ -5,9 +5,11 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerEntry.ApiServer", "ServerEntry.ApiServer\ServerEntry.ApiServer.csproj", "{719F59C8-6838-4EF5-834A-88A6B659DECC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerEntry.Data.MongoDbAdapter", "ServerEntry.Data.MongoDbAdapter\ServerEntry.Data.MongoDbAdapter.csproj", "{4A389572-F935-4367-B078-59B210F3BE86}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerEntry.Shared", "ServerEntry.Shared\ServerEntry.Shared.csproj", "{9D05F22F-963C-49BC-8003-0718EE63A65E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServerEntry.Data", "ServerEntry.Data", "{D3261995-5A5C-40A9-BE3A-0F36A0DCBDCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerEntry.Data.MongoDbAdapter", "ServerEntry.Data\ServerEntry.Data.MongoDbAdapter\ServerEntry.Data.MongoDbAdapter.csproj", "{7C5FF16F-A0E8-4A38-9589-D911013636D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,13 +24,16 @@ Global
 		{719F59C8-6838-4EF5-834A-88A6B659DECC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{719F59C8-6838-4EF5-834A-88A6B659DECC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{719F59C8-6838-4EF5-834A-88A6B659DECC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A389572-F935-4367-B078-59B210F3BE86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A389572-F935-4367-B078-59B210F3BE86}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A389572-F935-4367-B078-59B210F3BE86}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A389572-F935-4367-B078-59B210F3BE86}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9D05F22F-963C-49BC-8003-0718EE63A65E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9D05F22F-963C-49BC-8003-0718EE63A65E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D05F22F-963C-49BC-8003-0718EE63A65E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D05F22F-963C-49BC-8003-0718EE63A65E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C5FF16F-A0E8-4A38-9589-D911013636D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C5FF16F-A0E8-4A38-9589-D911013636D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C5FF16F-A0E8-4A38-9589-D911013636D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C5FF16F-A0E8-4A38-9589-D911013636D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7C5FF16F-A0E8-4A38-9589-D911013636D4} = {D3261995-5A5C-40A9-BE3A-0F36A0DCBDCE}
 	EndGlobalSection
 EndGlobal
