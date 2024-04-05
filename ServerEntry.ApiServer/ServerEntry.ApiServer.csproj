@@ -10,4 +10,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ServerEntry.Shared\ServerEntry.Shared.csproj" />
+    <ProjectReference Include="..\ServerEntry.Data\ServerEntry.Data.DbAdapter\ServerEntry.Data.DbAdapter.csproj" />
+    <ProjectReference Include="..\ServerEntry.Data\ServerEntry.Data.HardwareStatus\ServerEntry.Data.HardwareStatus.csproj" />
+  </ItemGroup>
+
 </Project>
