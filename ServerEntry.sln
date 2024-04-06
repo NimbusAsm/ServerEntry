@@ -13,7 +13,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerEntry.Data.MongoDbAda
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerEntry.Data.DbAdapter", "ServerEntry.Data\ServerEntry.Data.DbAdapter\ServerEntry.Data.DbAdapter.csproj", "{50BACC8D-0B0A-418A-AF57-675F0E2EC99C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerEntry.Data.HardwareStatus", "ServerEntry.Data\ServerEntry.Data.HardwareStatus\ServerEntry.Data.HardwareStatus.csproj", "{885B4F8D-4CD8-440C-8CE8-E19B7835F572}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerEntry.Data.Hardware", "ServerEntry.Data\ServerEntry.Data.Hardware\ServerEntry.Data.Hardware.csproj", "{72C336EB-8955-4A13-834A-A01909B24E3C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reference", "Reference", "{15F6516D-0FAE-46DB-918D-17DD67ACC920}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common.BasicHelper", "Common.BasicHelper", "{B466D171-BD96-4834-A40A-226AE60FDFC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.BasicHelper", "Reference\Common.BasicHelper\Common.BasicHelper\Common.BasicHelper.csproj", "{2A529E56-5282-412B-A239-FC12CA8FCEB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,14 +46,20 @@ Global
 		{50BACC8D-0B0A-418A-AF57-675F0E2EC99C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50BACC8D-0B0A-418A-AF57-675F0E2EC99C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50BACC8D-0B0A-418A-AF57-675F0E2EC99C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{885B4F8D-4CD8-440C-8CE8-E19B7835F572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{885B4F8D-4CD8-440C-8CE8-E19B7835F572}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{885B4F8D-4CD8-440C-8CE8-E19B7835F572}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{885B4F8D-4CD8-440C-8CE8-E19B7835F572}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72C336EB-8955-4A13-834A-A01909B24E3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72C336EB-8955-4A13-834A-A01909B24E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72C336EB-8955-4A13-834A-A01909B24E3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72C336EB-8955-4A13-834A-A01909B24E3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A529E56-5282-412B-A239-FC12CA8FCEB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A529E56-5282-412B-A239-FC12CA8FCEB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A529E56-5282-412B-A239-FC12CA8FCEB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A529E56-5282-412B-A239-FC12CA8FCEB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7C5FF16F-A0E8-4A38-9589-D911013636D4} = {D3261995-5A5C-40A9-BE3A-0F36A0DCBDCE}
 		{50BACC8D-0B0A-418A-AF57-675F0E2EC99C} = {D3261995-5A5C-40A9-BE3A-0F36A0DCBDCE}
-		{885B4F8D-4CD8-440C-8CE8-E19B7835F572} = {D3261995-5A5C-40A9-BE3A-0F36A0DCBDCE}
+		{72C336EB-8955-4A13-834A-A01909B24E3C} = {D3261995-5A5C-40A9-BE3A-0F36A0DCBDCE}
+		{B466D171-BD96-4834-A40A-226AE60FDFC3} = {15F6516D-0FAE-46DB-918D-17DD67ACC920}
+		{2A529E56-5282-412B-A239-FC12CA8FCEB9} = {B466D171-BD96-4834-A40A-226AE60FDFC3}
 	EndGlobalSection
 EndGlobal

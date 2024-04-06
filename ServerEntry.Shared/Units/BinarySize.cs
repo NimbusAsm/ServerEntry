@@ -1,6 +1,9 @@
-﻿namespace ServerEntry.Shared.Units;
+﻿using System.Text.RegularExpressions;
+using Common.BasicHelper.Utils.Extensions;
 
-public class BinarySize
+namespace ServerEntry.Shared.Units;
+
+public partial class BinarySize
 {
     public BinarySize()
     {
@@ -49,6 +52,49 @@ public class BinarySize
 
             return $"{BytesCount / lvEB} ZB";
         }
+    }
+
+    [GeneratedRegex(@"(\d+).?(\d*)\s*(B|KB|MB|GB|TB|PB|EB)", RegexOptions.IgnoreCase)]
+    private static partial Regex SizeTextRegex();
+
+    public static BinarySize? Parse(string size)
+    {
+        decimal bytesCount = -1;
+
+        SizeTextRegex().Match(size).WhenSuccess(x =>
+        {
+            bytesCount = 0;
+
+            var integer = x?.Groups[1].Value ?? string.Empty;
+            var left = x?.Groups[2].Value ?? string.Empty;
+            var unit = x?.Groups[3].Value ?? string.Empty;
+
+            var scale = unit.ToUpper() switch
+            {
+                "B" => 1,
+                "KB" => 1000,
+                "MB" => 1000 * 1000,
+                "GB" => Math.Pow(1000, 3),
+                "TB" => Math.Pow(1000, 4),
+                "PB" => Math.Pow(1000, 5),
+                "EB" => Math.Pow(1000, 6),
+                _ => 1,
+            };
+
+            if (unit.Contains('b')) scale *= 1.0 / 8.0;
+
+            var p = 0;
+
+            for (var i = integer.Length - 1; i >= 0; --i, ++p)
+                bytesCount += (int)((integer[i] - '0') * Math.Pow(10, p) * scale);
+
+            p = 0;
+
+            for (var i = 0; i < left.Length; i++, --p)
+                bytesCount += (int)((integer[i] - '0') * Math.Pow(10, p) * scale);
+        });
+
+        return bytesCount == -1 ? null : new BinarySize(bytesCount);
     }
 
     public static BinarySize operator +(BinarySize? a, BinarySize? b) => new(a?.BytesCount ?? 0 + b?.BytesCount ?? 0);

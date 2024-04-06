@@ -1,6 +1,7 @@
 ﻿using ServerEntry.Shared.Hardware.Memory;
+using ServerEntry.Shared.Hardware.Processor;
 
-namespace ServerEntry.Shared.Hardware.Processor;
+namespace ServerEntry.Shared.Hardware;
 
 public class HardwareStatus
 {

@@ -4,6 +4,11 @@ namespace ServerEntry.Shared.Hardware.Memory.Memories;
 
 public class RamInfo : MemoryInfo
 {
+    public RamInfo()
+    {
+        Types = MemoryTypes.RAM;
+    }
+
     public BinarySize? CompressedSize { get; set; }
 
     public BinarySize? CommitedSize { get; set; }

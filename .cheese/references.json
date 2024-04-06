@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "Common.BasicHelper",
+    "Location": "Reference/Common.BasicHelper",
+    "Url": "git@github.com:Crequency/Common.BasicHelper.git",
+    "Branch": "dev=main",
+    "RemoteBranch": "origin/dev=main",
+    "Type": 1,
+    "InSubmodule": false
+  }
+]

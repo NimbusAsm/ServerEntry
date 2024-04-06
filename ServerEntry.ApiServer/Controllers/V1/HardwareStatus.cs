@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ServerEntry.Data.Hardware;
 
 namespace ServerEntry.ApiServer.Controllers.V1;
 
@@ -11,6 +12,6 @@ public class HardwareStatusController(ILogger<HardwareStatusController> logger) 
     [HttpGet("", Name = nameof(GetHardwareStatus))]
     public IActionResult GetHardwareStatus([FromQuery] string? token)
     {
-        return Ok();
+        return Ok(HardwareStatusProvider.Instance.GetStatus());
     }
 }

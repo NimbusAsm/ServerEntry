@@ -12,9 +12,9 @@ public class ProcessorInfo
 
     public string? Name { get; set; }
 
-    public double Usage { get; set; } = double.NaN;
+    public double Usage { get; set; } = 0.0;
 
-    public double Temperature { get; set; } = double.NaN;
+    public double Temperature { get; set; } = 0.0;
 
     public string? Model { get; set; }
 
@@ -22,7 +22,7 @@ public class ProcessorInfo
 
     public string? Architecture { get; set; }
 
-    public double Frequency { get; set; } = double.NaN;
+    public double Frequency { get; set; } = 0.0;
 
-    public double FrequencyBase { get; set; } = double.NaN;
+    public double FrequencyBase { get; set; } = 0.0;
 }

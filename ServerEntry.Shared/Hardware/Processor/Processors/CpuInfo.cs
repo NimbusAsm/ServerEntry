@@ -24,5 +24,7 @@ public class CpuInfo : ProcessorInfo
 
     public CacheInfo? L3CacheSize { get; set; }
 
+    public CacheInfo? TotalCacheSize { get; set; }
+
     public IEnumerable<double> PerCoreUsage { get; set; } = [];
 }

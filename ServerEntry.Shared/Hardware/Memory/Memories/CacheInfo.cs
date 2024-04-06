@@ -2,4 +2,8 @@
 
 public class CacheInfo : MemoryInfo
 {
+    public CacheInfo()
+    {
+        Types = MemoryTypes.Cache;
+    }
 }

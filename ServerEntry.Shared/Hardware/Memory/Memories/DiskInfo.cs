@@ -4,7 +4,7 @@ namespace ServerEntry.Shared.Hardware.Memory.Memories;
 
 public class DiskInfo : MemoryInfo
 {
-    public double Load { get; set; } = double.NaN;
+    public double Load { get; set; } = 0.0;
 
     public BinarySize? ReadSpeedPerSecond { get; set; }
 
