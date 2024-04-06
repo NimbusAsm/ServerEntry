@@ -14,7 +14,7 @@ public class MemoryInfo
 
     public string? Name { get; set; }
 
-    public double Usage => (double)(Available / Capacity);
+    public double Usage => (Capacity - Available) / Capacity;
 
     public BinarySize? Available { get; set; }
 

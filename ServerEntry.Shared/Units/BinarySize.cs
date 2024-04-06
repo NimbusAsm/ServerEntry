@@ -99,11 +99,11 @@ public partial class BinarySize
         return bytesCount == -1 ? null : new BinarySize(bytesCount);
     }
 
-    public static BinarySize operator +(BinarySize? a, BinarySize? b) => new(a?.BytesCount ?? 0 + b?.BytesCount ?? 0);
+    public static BinarySize operator +(BinarySize? a, BinarySize? b) => new((a?.BytesCount ?? 0) + (b?.BytesCount ?? 0));
 
-    public static BinarySize operator -(BinarySize? a, BinarySize? b) => new(a?.BytesCount ?? 0 - b?.BytesCount ?? 0);
+    public static BinarySize operator -(BinarySize? a, BinarySize? b) => new((a?.BytesCount ?? 0) - (b?.BytesCount ?? 0));
 
     public static long operator *(BinarySize? a, BinarySize? b) => (a?.BytesCount ?? 0) * (b?.BytesCount ?? 1);
 
-    public static decimal operator /(BinarySize? a, BinarySize? b) => (a?.BytesCount ?? 0) / (b?.BytesCount ?? 1);
+    public static double operator /(BinarySize? a, BinarySize? b) => ((a?.BytesCount * 1.0) ?? 0.0) / ((b?.BytesCount * 1.0) ?? 1.0);
 }
