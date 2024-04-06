@@ -7,7 +7,7 @@ public class HardwareStatus
 {
     public string? Name { get; set; }
 
-    public ProcessorInfo? ProcessorInfo { get; set; }
+    public IEnumerable<ProcessorInfo> Processors { get; set; } = [];
 
     public IEnumerable<MemoryInfo> Memories { get; set; } = [];
 }

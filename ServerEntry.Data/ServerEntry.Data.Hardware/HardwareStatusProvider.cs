@@ -1,4 +1,5 @@
-﻿using ServerEntry.Data.Hardware.Processors;
+﻿using ServerEntry.Data.Hardware.Memories;
+using ServerEntry.Data.Hardware.Processors;
 using ServerEntry.Shared.Hardware;
 
 namespace ServerEntry.Data.Hardware;
@@ -13,7 +14,8 @@ public class HardwareStatusProvider
     {
         var result = new HardwareStatus()
         {
-            ProcessorInfo = CpuInfoFetcher.Instance.Fetch(),
+            Processors = [CpuInfoFetcher.Instance.Fetch()],
+            Memories = [RamInfoFetcher.Instance.Fetch()],
         };
 
         return result;
