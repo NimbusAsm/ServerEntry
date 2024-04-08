@@ -21,24 +21,31 @@ public partial class RamInfoFetcher
 
             var info = File.ReadAllText(path);
 
-            MemTotalRegex().Match(info).WhenSuccess(x => result.Capacity = BinarySize.Parse(x?.Groups[1].Value ?? ""));
+            MemTotalRegex().Match(info).WhenSuccess(x => result.Capacity = BinarySize.Parse(ValueAt(x, 1)));
 
-            MemFreeRegex().Match(info).WhenSuccess(x => result.Available = BinarySize.Parse(x?.Groups[1].Value ?? ""));
+            MemAvailableRegex().Match(info).WhenSuccess(x => result.Available = BinarySize.Parse(ValueAt(x, 1)));
 
-            CachedRegex().Match(info).WhenSuccess(x => result.CachedSize = BinarySize.Parse(x?.Groups[1].Value ?? ""));
+            CachedRegex().Match(info).WhenSuccess(x => result.CachedSize = BinarySize.Parse(ValueAt(x, 1)));
+
+            CommittedRegex().Match(info).WhenSuccess(x => result.CommitedSize = BinarySize.Parse(ValueAt(x, 1)));
 
             return result;
         }
 
         return result;
+
+        static string ValueAt(Match? x, int index) => x?.Groups[1].Value ?? "";
     }
 
     [GeneratedRegex(@"MemTotal:\s+(.+)")]
     private static partial Regex MemTotalRegex();
 
-    [GeneratedRegex(@"MemFree:\s+(.+)")]
-    private static partial Regex MemFreeRegex();
+    [GeneratedRegex(@"MemAvailable:\s+(.+)")]
+    private static partial Regex MemAvailableRegex();
 
     [GeneratedRegex(@"Cached:\s+(.+)")]
     private static partial Regex CachedRegex();
+
+    [GeneratedRegex(@"Committed_AS:\s+(.+)")]
+    private static partial Regex CommittedRegex();
 }
