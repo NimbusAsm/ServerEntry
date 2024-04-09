@@ -15,7 +15,7 @@ public class HardwareStatusProvider
         var result = new HardwareStatus()
         {
             Processors = [CpuInfoFetcher.Instance.Fetch()],
-            Memories = [RamInfoFetcher.Instance.Fetch()],
+            Memories = [RamInfoFetcher.Instance.Fetch(), .. DiskInfoFetcher.Instance.Fetch()],
         };
 
         return result;

@@ -1,4 +1,5 @@
-﻿using ServerEntry.Shared.Units;
+﻿using ServerEntry.Shared.Hardware.Memory.Memories.Partitions;
+using ServerEntry.Shared.Units;
 
 namespace ServerEntry.Shared.Hardware.Memory.Memories;
 
@@ -15,6 +16,8 @@ public class DiskInfo : MemoryInfo
     public BinarySize? MaxWriteSpeedPerSecond { get; set; }
 
     public BinarySize? Formated { get; set; }
+
+    public IEnumerable<PartitionInfo> Partitions { get; set; } = [];
 
     public bool IsHostingOperatingSystem { get; set; } = false;
 }

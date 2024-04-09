@@ -34,7 +34,7 @@ public partial class RamInfoFetcher
 
         return result;
 
-        static string ValueAt(Match? x, int index) => x?.Groups[1].Value ?? "";
+        static string ValueAt(Match? x, int index) => x?.Groups[index].Value ?? "";
     }
 
     [GeneratedRegex(@"MemTotal:\s+(.+)")]

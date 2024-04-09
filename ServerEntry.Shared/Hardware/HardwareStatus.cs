@@ -5,7 +5,7 @@ namespace ServerEntry.Shared.Hardware;
 
 public class HardwareStatus
 {
-    public string? Name { get; set; }
+    public DateTime GenerateUtcTime { get; set; } = DateTime.UtcNow;
 
     public IEnumerable<ProcessorInfo> Processors { get; set; } = [];
 

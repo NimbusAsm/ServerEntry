@@ -22,28 +22,28 @@ public partial class CpuInfoFetcher
 
             var info = File.ReadAllText(basicInfoPath);
 
-            ModelNameRegex().Match(info).WhenSuccess(x => result.Name = x?.Groups[1].Value);
+            ModelNameRegex().Match(info).WhenSuccess(x => result.Name = ValueAt(x, 1));
 
-            ModelRegex().Match(info).WhenSuccess(x => result.Model = x?.Groups[1].Value);
+            ModelRegex().Match(info).WhenSuccess(x => result.Model = ValueAt(x, 1));
 
-            ManufacturerRegex().Match(info).WhenSuccess(x => result.Manufacturer = x?.Groups[1].Value);
+            ManufacturerRegex().Match(info).WhenSuccess(x => result.Manufacturer = ValueAt(x, 1));
 
             FrequencyRegex().Match(info).WhenSuccess(x =>
             {
-                if (double.TryParse(x?.Groups[1].Value, out var frequency))
+                if (double.TryParse(ValueAt(x, 1), out var frequency))
                     result.Frequency = frequency;
             });
 
             CacheSizeRegex().Match(info).WhenSuccess(
                 x => result.TotalCacheSize = new CacheInfo()
                 {
-                    Capacity = BinarySize.Parse(x?.Groups[1].Value ?? ""),
+                    Capacity = BinarySize.Parse(ValueAt(x, 1) ?? ""),
                 }
             );
 
-            CoreCountRegex().Match(info).WhenSuccess(x => result.CoreCount = int.Parse(x?.Groups[1].Value ?? "-1"));
+            CoreCountRegex().Match(info).WhenSuccess(x => result.CoreCount = int.Parse(ValueAt(x, 1) ?? "-1"));
 
-            ThreadCountRegex().Match(info).WhenSuccess(x => result.ThreadCount = int.Parse(x?.Groups[1].Value ?? "-1"));
+            ThreadCountRegex().Match(info).WhenSuccess(x => result.ThreadCount = int.Parse(ValueAt(x, 1) ?? "-1"));
 
             const string cpuDevicesPath = "/sys/devices/system/cpu";
 
@@ -118,6 +118,8 @@ public partial class CpuInfoFetcher
         }
 
         return result;
+
+        static string? ValueAt(Match? x, int index) => x?.Groups[index].Value;
 
         static Range GetRange(string x)
         {
