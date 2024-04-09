@@ -14,4 +14,16 @@ public class HardwareStatusController(ILogger<HardwareStatusController> logger) 
     {
         return Ok(HardwareStatusProvider.Instance.GetStatus());
     }
+
+    [HttpGet("Processors", Name = nameof(GetProcessorsInfo))]
+    public IActionResult GetProcessorsInfo([FromQuery] string? token)
+    {
+        return Ok(HardwareStatusProvider.Instance.GetProcessorInfos());
+    }
+
+    [HttpGet("Memory", Name = nameof(GetMemoryInfo))]
+    public IActionResult GetMemoryInfo([FromQuery] string? token)
+    {
+        return Ok(HardwareStatusProvider.Instance.GetMemoryInfos());
+    }
 }
