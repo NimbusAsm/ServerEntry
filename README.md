@@ -8,11 +8,18 @@
 git clone git@github.com:ServerEntry/ServerEntry.git
 
 cd ServerEntry
+
+# Use cheese to initialize reference
+cheese ref --init
+
+# If you have no cheese tool, you can install it by:
+dotnet tool install cheese --global
 ```
 
 ## Requirements
 
 - dotnet sdk 8.0
+- cheese (recommend to use latest)
 
 ## Components
 
