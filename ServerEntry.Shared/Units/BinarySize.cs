@@ -15,42 +15,49 @@ public partial class BinarySize
         BytesCount = bytesCount;
     }
 
+    public bool IsInIecBase { get; set; } = false;
+
     public long BytesCount { get; set; } = 0;
 
     public string DisplayText
     {
         get
         {
-            const double lvB = 1000;
-            const double lvKB = lvB * 1000;
-            const double lvMB = lvKB * 1000;
-            const double lvGB = lvMB * 1000;
-            const double lvTB = lvGB * 1000;
-            const double lvPB = lvTB * 1000;
-            const double lvEB = lvPB * 1000;
+            var lvBase = IsInIecBase ? 1000.0 : 1024.0;
 
-            if (BytesCount < lvB)
-                return $"{BytesCount} B";
+            var lvB = 1.0;
+            var lvKB = lvB * lvBase;
+            var lvMB = lvKB * lvBase;
+            var lvGB = lvMB * lvBase;
+            var lvTB = lvGB * lvBase;
+            var lvPB = lvTB * lvBase;
+            var lvEB = lvPB * lvBase;
+            var lvZB = lvEB * lvBase;
+
+            var iecBase = IsInIecBase ? "i" : "";
 
             if (BytesCount < lvKB)
-                return $"{Math.Round(BytesCount / lvB, 2)} KB";
+                return $"{BytesCount} B";
 
             if (BytesCount < lvMB)
-                return $"{Math.Round(BytesCount / lvKB, 2)} MB";
+                return $"{Math.Round(BytesCount / lvKB, 2)} K{iecBase}B";
 
             if (BytesCount < lvGB)
-                return $"{Math.Round(BytesCount / lvMB, 2)} GB";
+                return $"{Math.Round(BytesCount / lvMB, 2)} M{iecBase}B";
 
             if (BytesCount < lvTB)
-                return $"{Math.Round(BytesCount / lvGB, 2)} TB";
+                return $"{Math.Round(BytesCount / lvGB, 2)} G{iecBase}B";
 
             if (BytesCount < lvPB)
-                return $"{Math.Round(BytesCount / lvTB, 2)} PB";
+                return $"{Math.Round(BytesCount / lvTB, 2)} T{iecBase}B";
 
             if (BytesCount < lvEB)
-                return $"{Math.Round(BytesCount / lvPB, 2)} EB";
+                return $"{Math.Round(BytesCount / lvPB, 2)} P{iecBase}B";
 
-            return $"{Math.Round(BytesCount / lvEB, 2)} ZB";
+            if (BytesCount < lvZB)
+                return $"{Math.Round(BytesCount / lvEB, 2)} E{iecBase}B";
+
+            return $"{Math.Round(BytesCount / lvZB, 2)} Z{iecBase}B";
         }
     }
 
@@ -59,11 +66,11 @@ public partial class BinarySize
 
     public static BinarySize? Parse(string size)
     {
-        long bytesCount = -1;
+        BinarySize? result = null;
 
         SizeTextRegex().Match(size).WhenSuccess(x =>
         {
-            bytesCount = 0;
+            result = new();
 
             var integer = x?.Groups[1].Value ?? string.Empty;
             var left = x?.Groups[2].Value ?? string.Empty;
@@ -71,7 +78,9 @@ public partial class BinarySize
 
             var diff = unit.ToLower().Contains('i') ? 1024 : 1000;
 
-            var scale = unit.ToUpper() switch
+            result.IsInIecBase = diff == 1000;
+
+            var scale = unit.ToUpper().Replace("IB", "B") switch
             {
                 "B" => 1,
                 "KB" => diff,
@@ -88,15 +97,15 @@ public partial class BinarySize
             var p = 0;
 
             for (var i = integer.Length - 1; i >= 0; --i, ++p)
-                bytesCount += (long)((integer[i] - '0') * Math.Pow(10, p) * scale);
+                result.BytesCount += (long)((integer[i] - '0') * Math.Pow(10, p) * scale);
 
             p = 0;
 
             for (var i = 0; i < left.Length; i++, --p)
-                bytesCount += (long)((integer[i] - '0') * Math.Pow(10, p) * scale);
+                result.BytesCount += (long)((integer[i] - '0') * Math.Pow(10, p) * scale);
         });
 
-        return bytesCount == -1 ? null : new BinarySize(bytesCount);
+        return result;
     }
 
     public static BinarySize operator +(BinarySize? a, BinarySize? b) => new((a?.BytesCount ?? 0) + (b?.BytesCount ?? 0));
