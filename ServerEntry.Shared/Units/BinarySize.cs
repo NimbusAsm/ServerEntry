@@ -115,4 +115,12 @@ public partial class BinarySize
     public static long operator *(BinarySize? a, BinarySize? b) => (a?.BytesCount ?? 0) * (b?.BytesCount ?? 1);
 
     public static double operator /(BinarySize? a, BinarySize? b) => ((a?.BytesCount * 1.0) ?? 0.0) / ((b?.BytesCount * 1.0) ?? 1.0);
+
+    public static bool operator <(BinarySize a, BinarySize b) => a.BytesCount < b.BytesCount;
+
+    public static bool operator <=(BinarySize a, BinarySize b) => a.BytesCount <= b.BytesCount;
+
+    public static bool operator >(BinarySize a, BinarySize b) => a.BytesCount > b.BytesCount;
+
+    public static bool operator >=(BinarySize a, BinarySize b) => a.BytesCount >= b.BytesCount;
 }
