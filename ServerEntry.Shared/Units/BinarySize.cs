@@ -76,7 +76,7 @@ public partial class BinarySize
             var left = x?.Groups[2].Value ?? string.Empty;
             var unit = x?.Groups[3].Value ?? string.Empty;
 
-            var diff = unit.ToLower().Contains('i') ? 1024 : 1000;
+            var diff = unit.ToLower().Contains('i') ? 1000 : 1024;
 
             result.IsInIecBase = diff == 1000;
 
@@ -99,7 +99,7 @@ public partial class BinarySize
             for (var i = integer.Length - 1; i >= 0; --i, ++p)
                 result.BytesCount += (long)((integer[i] - '0') * Math.Pow(10, p) * scale);
 
-            p = 0;
+            p = -1;
 
             for (var i = 0; i < left.Length; i++, --p)
                 result.BytesCount += (long)((integer[i] - '0') * Math.Pow(10, p) * scale);
