@@ -31,5 +31,13 @@ cd ServerEntry.ApiServer
 dotnet watch
 ```
 
+### Dashboard
+
+```shell
+cd ServerEntry.Dashboard
+
+dotnet watch
+```
+
 Then, visit [localhost:5111/swagger](http://localhost:5111/swagger/index.html) to view api docs
 
