@@ -14,6 +14,7 @@ dependencies:
   get: ^4.6.6
   cherrilog: ^0.2.0
   community_material_icon: ^5.9.55
+  http: ^1.2.1
 
 dev_dependencies:
   flutter_test:

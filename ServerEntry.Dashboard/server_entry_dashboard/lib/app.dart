@@ -1,6 +1,7 @@
 ﻿import 'package:cherrilog/cherrilog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:server_entry_dashboard/utils/api_resolver/api_resolver.dart';
 import 'package:server_entry_dashboard/utils/controllers/title_controller.dart';
 
 class _App {
@@ -9,6 +10,8 @@ class _App {
   var navigationIndex = 0.obs;
 
   late PageController navPageController;
+
+  final apiResolver = Get.put(ApiResolver());
 
   final titleController = Get.put(TitleController());
 

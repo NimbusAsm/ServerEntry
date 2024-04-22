@@ -17,15 +17,17 @@ class _NotFoundPageState extends State<NotFoundPage> {
   Widget build(BuildContext context) {
     app.titleController.updateTitle('404 Not Found');
 
-    return const Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            '404 Not Found',
-            style: TextStyle(fontSize: 24),
-          ),
-        ],
+    return const Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              '404 Not Found',
+              style: TextStyle(fontSize: 24),
+            ),
+          ],
+        ),
       ),
     );
   }

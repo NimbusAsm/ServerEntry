@@ -20,14 +20,16 @@ class _DevelopingPageState extends State<DevelopingPage> {
   Widget build(BuildContext context) {
     app.titleController.updateTitle('${widget.name}.dev');
 
-    return const Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            'Developing ...',
-          ),
-        ],
+    return const Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Developing ...',
+            ),
+          ],
+        ),
       ),
     );
   }

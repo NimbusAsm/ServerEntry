@@ -6,4 +6,5 @@ const Map<String, String> en_us = {
   'Nav_WebsitesPage': 'Websites',
   'Nav_AppsPage': 'Apps',
   'Nav_Settings': 'Settings',
+  'DebugPage_Title': 'Debug',
 };
