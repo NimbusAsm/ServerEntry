@@ -1,6 +1,7 @@
 ﻿import 'package:cherrilog/cherrilog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:server_entry_dashboard/utils/controllers/title_controller.dart';
 
 class _App {
   static final _App _singleton = _App._internal();
@@ -8,6 +9,8 @@ class _App {
   var navigationIndex = 0.obs;
 
   late PageController navPageController;
+
+  final titleController = Get.put(TitleController());
 
   void navPageTo(int index) {
     var delta = (index - app.navigationIndex.value).abs();

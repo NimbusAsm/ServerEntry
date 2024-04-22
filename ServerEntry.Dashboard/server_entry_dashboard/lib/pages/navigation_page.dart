@@ -2,10 +2,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:server_entry_dashboard/app.dart';
-import 'package:server_entry_dashboard/pages/developing_page.dart';
+import 'package:server_entry_dashboard/pages/debug_page.dart';
+import 'package:server_entry_dashboard/pages/routes/developing_page.dart';
+import 'package:server_entry_dashboard/pages/routes/pages.dart';
 import 'package:server_entry_dashboard/widgets/theme_switcher.dart';
 
-class NavigationPage extends StatefulWidget {
+class NavigationPage extends StatefulWidget implements ConstantPage {
+  static String getRoute() => '/';
+
+  static Widget Function() getPage() => () => const NavigationPage();
+
   const NavigationPage({super.key});
 
   @override
@@ -38,7 +44,7 @@ class _NavigationPageState extends State<NavigationPage> {
                 children: [
                   const SizedBox(height: 20),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () => Get.toNamed(DebugPage.getRoute()),
                     icon: const Icon(Icons.bug_report),
                   ),
                   const SizedBox(height: 5),
@@ -96,10 +102,10 @@ class _NavigationPageState extends State<NavigationPage> {
               physics: const NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
               children: const [
-                ClipRect(child: DevelopingPage()),
-                ClipRect(child: DevelopingPage()),
-                ClipRect(child: DevelopingPage()),
-                ClipRect(child: DevelopingPage()),
+                ClipRect(child: DevelopingPage(name: 'Home')),
+                ClipRect(child: DevelopingPage(name: 'Websites')),
+                ClipRect(child: DevelopingPage(name: 'Apps')),
+                ClipRect(child: DevelopingPage(name: 'Settings')),
               ],
             ),
           ),
