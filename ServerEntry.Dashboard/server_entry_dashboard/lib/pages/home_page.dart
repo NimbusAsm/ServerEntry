@@ -3,6 +3,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:server_entry_dashboard/app.dart';
 import 'package:server_entry_dashboard/pages/routes/pages.dart';
+import 'package:server_entry_dashboard/widgets/home/device_info.dart';
 
 class HomePage extends StatefulWidget implements ConstantPage {
   static String getRoute() => '/home';
@@ -20,13 +21,21 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     app.titleController.updateTitle('HomePage_Title'.tr);
 
+    var widgets = [
+      const DeviceInfoWidget(),
+    ];
+
     return Scaffold(
       body: MasonryGridView.count(
         itemCount: 11,
         crossAxisCount: 4,
-        mainAxisSpacing: 4,
-        crossAxisSpacing: 4,
+        mainAxisSpacing: 0,
+        crossAxisSpacing: 0,
         itemBuilder: (context, index) {
+          if (index >= 0 && index < widgets.length) {
+            return widgets[index];
+          }
+
           return Container(
             height: (index % 5 + 1) * 100,
             margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
