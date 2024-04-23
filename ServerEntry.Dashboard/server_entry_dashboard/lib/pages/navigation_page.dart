@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:server_entry_dashboard/app.dart';
 import 'package:server_entry_dashboard/pages/debug_page.dart';
+import 'package:server_entry_dashboard/pages/home_page.dart';
 import 'package:server_entry_dashboard/pages/routes/developing_page.dart';
 import 'package:server_entry_dashboard/pages/routes/pages.dart';
 import 'package:server_entry_dashboard/widgets/theme_switcher.dart';
@@ -102,7 +103,7 @@ class _NavigationPageState extends State<NavigationPage> {
               physics: const NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
               children: const [
-                ClipRect(child: DevelopingPage(name: 'Home')),
+                ClipRect(child: HomePage()),
                 ClipRect(child: DevelopingPage(name: 'Websites')),
                 ClipRect(child: DevelopingPage(name: 'Apps')),
                 ClipRect(child: DevelopingPage(name: 'Settings')),

@@ -1,7 +1,7 @@
 ﻿import 'package:cherrilog/cherrilog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:server_entry_dashboard/utils/api_resolver/api_resolver.dart';
+import 'package:server_entry_dashboard/data/api_resolver.dart';
 import 'package:server_entry_dashboard/utils/controllers/title_controller.dart';
 
 class _App {

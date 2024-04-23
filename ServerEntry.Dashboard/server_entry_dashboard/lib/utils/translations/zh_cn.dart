@@ -6,5 +6,6 @@ const Map<String, String> zh_cn = {
   'Nav_WebsitesPage': '网站',
   'Nav_AppsPage': '应用',
   'Nav_Settings': '设置',
+  'HomePage_Title': '主页',
   'DebugPage_Title': '调试',
 };
