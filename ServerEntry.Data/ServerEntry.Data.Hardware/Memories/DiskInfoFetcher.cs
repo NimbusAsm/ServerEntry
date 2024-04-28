@@ -12,7 +12,7 @@ public partial class DiskInfoFetcher
 
     public static DiskInfoFetcher Instance => _instance ??= new();
 
-    public IEnumerable<DiskInfo> Fetch()
+    public IEnumerable<DiskInfo> Fetch(string range = "all")
     {
         var result = new List<DiskInfo>();
 

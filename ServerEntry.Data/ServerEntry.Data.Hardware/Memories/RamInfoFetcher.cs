@@ -11,7 +11,7 @@ public partial class RamInfoFetcher
 
     public static RamInfoFetcher Instance => _instance ??= new();
 
-    public RamInfo Fetch()
+    public RamInfo Fetch(string range = "all")
     {
         var result = new RamInfo();
 

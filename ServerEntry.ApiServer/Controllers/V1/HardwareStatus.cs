@@ -10,20 +10,20 @@ public class HardwareStatusController(ILogger<HardwareStatusController> logger) 
     private readonly ILogger<HardwareStatusController> _logger = logger;
 
     [HttpGet("", Name = nameof(GetHardwareStatus))]
-    public IActionResult GetHardwareStatus([FromQuery] string? token)
+    public IActionResult GetHardwareStatus([FromQuery] string? token, [FromQuery] string range = "all")
     {
-        return Ok(HardwareStatusProvider.Instance.GetStatus());
+        return Ok(HardwareStatusProvider.Instance.GetStatus(range));
     }
 
     [HttpGet("Processors", Name = nameof(GetProcessorsInfo))]
-    public IActionResult GetProcessorsInfo([FromQuery] string? token)
+    public IActionResult GetProcessorsInfo([FromQuery] string? token, [FromQuery] string range = "all")
     {
-        return Ok(HardwareStatusProvider.Instance.GetProcessorInfos());
+        return Ok(HardwareStatusProvider.Instance.GetProcessorInfos(range));
     }
 
     [HttpGet("Memory", Name = nameof(GetMemoryInfo))]
-    public IActionResult GetMemoryInfo([FromQuery] string? token)
+    public IActionResult GetMemoryInfo([FromQuery] string? token, [FromQuery] string range = "all")
     {
-        return Ok(HardwareStatusProvider.Instance.GetMemoryInfos());
+        return Ok(HardwareStatusProvider.Instance.GetMemoryInfos(range));
     }
 }

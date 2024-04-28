@@ -4,7 +4,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AllowAllOrigins();
 
-builder.Services.AddControllers();
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.WriteIndented = true;
+    })
+    ;
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
