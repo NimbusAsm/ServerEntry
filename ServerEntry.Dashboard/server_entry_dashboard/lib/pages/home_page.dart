@@ -1,9 +1,12 @@
-﻿import 'package:flutter/material.dart';
+﻿import 'dart:math';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:server_entry_dashboard/app.dart';
 import 'package:server_entry_dashboard/pages/routes/pages.dart';
-import 'package:server_entry_dashboard/widgets/home/device_info.dart';
+import 'package:server_entry_dashboard/widgets/home/cpu_info.dart';
+import 'package:server_entry_dashboard/widgets/home/ram_info.dart';
 
 class HomePage extends StatefulWidget implements ConstantPage {
   static String getRoute() => '/home';
@@ -22,10 +25,17 @@ class _HomePageState extends State<HomePage> {
     app.titleController.updateTitle('HomePage_Title'.tr);
 
     var widgets = [
-      const DeviceInfoWidget(),
+      const CpuInfoWidget(),
+      const RamInfoWidget(),
     ];
 
+    var random = Random();
+
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.edit),
+      ),
       body: MasonryGridView.count(
         itemCount: 11,
         crossAxisCount: 4,
@@ -37,14 +47,9 @@ class _HomePageState extends State<HomePage> {
           }
 
           return Container(
-            height: (index % 5 + 1) * 100,
+            height: (index % 5 + 1) * 100 + random.nextInt(100) * 1.0,
             margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-            child: Card.filled(
-              color: Colors.indigo,
-              child: Center(
-                child: Text('$index'),
-              ),
-            ),
+            child: InfoCard(title: 'Test Widget', value: 'Index: $index'),
           );
         },
       ),
@@ -56,7 +61,8 @@ class InfoCard extends StatelessWidget {
   final String title;
   final String value;
 
-  InfoCard({
+  const InfoCard({
+    super.key,
     required this.title,
     required this.value,
   });
@@ -69,19 +75,19 @@ class InfoCard extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             Text(
               value,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16.0,
               ),
             ),

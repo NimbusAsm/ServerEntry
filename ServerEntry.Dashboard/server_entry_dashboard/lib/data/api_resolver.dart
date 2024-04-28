@@ -29,18 +29,18 @@ class ApiResolver {
 class HardwareStatusApiResolver {
   late ApiConfig apiConfig = ApiConfig();
 
-  Future<String?> get(String? token) {
-    var apiUrl = '${ApiResolver.urlBase(apiConfig)}/HardwareStatus/';
+  Future<String?> get(String? token, {String range = 'all'}) {
+    var apiUrl = '${ApiResolver.urlBase(apiConfig)}/HardwareStatus?range=$range';
     return ApiResolver.get(apiUrl);
   }
 
-  Future<String?> processors(String? token) {
-    var apiUrl = '${ApiResolver.urlBase(apiConfig)}/HardwareStatus/Processors';
+  Future<String?> processors(String? token, {String range = 'all'}) {
+    var apiUrl = '${ApiResolver.urlBase(apiConfig)}/HardwareStatus/Processors?range=$range';
     return ApiResolver.get(apiUrl);
   }
 
-  Future<String?> memoryInfo(String? token) {
-    var apiUrl = '${ApiResolver.urlBase(apiConfig)}/HardwareStatus/Memory';
+  Future<String?> memory(String? token, {String range = 'all'}) {
+    var apiUrl = '${ApiResolver.urlBase(apiConfig)}/HardwareStatus/Memory?range=$range';
     return ApiResolver.get(apiUrl);
   }
 }
