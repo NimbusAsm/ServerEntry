@@ -5,6 +5,12 @@
         }
     ],
     "settings": {
-        "git.autorefresh": true
+        "git.autorefresh": true,
+        "dart.lineLength": 200,
+        "[dart]": {
+            "editor.rulers": [
+                200
+            ],
+        }
     }
 }
