@@ -1,8 +1,12 @@
 ﻿import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:server_entry_dashboard/data/api_resolver.dart';
+import 'package:server_entry_dashboard/widgets/home/const/pending_widget.dart';
+import 'package:server_entry_dashboard/widgets/home/utils/percent_processor.dart';
+import 'package:server_entry_dashboard/widgets/widget_info_time.dart';
 
 class RamInfoWidget extends StatelessWidget {
   @override
@@ -42,89 +46,95 @@ class RamInfoWidget extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasError) return Text('Error: ${snapshot.error}');
 
-              var waitting = const Padding(
-                padding: EdgeInsets.all(30),
-                child: Center(
-                  child: SizedBox(
-                    width: 200,
-                    height: 200,
-                    child: CircularProgressIndicator.adaptive(),
-                  ),
-                ),
-              );
-
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
-                  return waitting;
+                  return const PendingWidget();
                 case ConnectionState.waiting:
-                  return waitting;
+                  return const PendingWidget();
                 case ConnectionState.active:
                   return FutureBuilder(
                     future: snapshot.data,
                     builder: (context, snapshot) {
                       var info = snapshot.data;
 
-                      if (info == null) return waitting;
+                      if (info == null) return const PendingWidget();
 
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            children: [
-                              Container(
-                                width: 80,
-                                height: 80,
-                                margin: const EdgeInsets.all(20),
-                                child: Stack(
-                                  children: [
-                                    Center(
-                                      child: SizedBox(
-                                        width: 80,
-                                        height: 80,
-                                        child: CircularProgressIndicator(value: info.usage),
-                                      ),
-                                    ),
-                                    Center(
-                                      child: Text('${(info.usage * 100).toStringAsFixed(1)} %'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                          LinearProgressIndicator(
+                            value: info.usage,
+                            backgroundColor: const Color.fromARGB(92, 158, 158, 158),
+                            borderRadius: BorderRadius.circular(15.0),
+                            minHeight: 8.0,
                           ),
                           const SizedBox(height: 10),
                           Table(
+                            columnWidths: const {
+                              0: FlexColumnWidth(),
+                              1: FixedColumnWidth(20.0),
+                              2: FlexColumnWidth(),
+                            },
                             children: [
                               TableRow(children: [
-                                Text('${'HomePage_RamWidget_Available'.tr}: '),
-                                Text(info.available),
-                                Text('${'HomePage_RamWidget_Capacity'.tr}: '),
-                                Text(info.capacity),
+                                const SizedBox(),
+                                const SizedBox(),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('${'HomePage_RamWidget_Usage'.tr}: '),
+                                    Text(info.usage.toProgressString()),
+                                  ],
+                                ),
+                              ]),
+                              const TableRow(children: [
+                                SizedBox(),
+                                SizedBox(),
+                                SizedBox(),
                               ]),
                               TableRow(children: [
-                                Text('${'HomePage_RamWidget_Commited'.tr}: '),
-                                Text(info.commitedSize),
-                                Text('${'HomePage_RamWidget_Cached'.tr}: '),
-                                Text(info.cachedSize),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('${'HomePage_RamWidget_Available'.tr}: '),
+                                    Text(info.available),
+                                  ],
+                                ),
+                                const SizedBox(),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('${'HomePage_RamWidget_Capacity'.tr}: '),
+                                    Text(info.capacity),
+                                  ],
+                                ),
+                              ]),
+                              TableRow(children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('${'HomePage_RamWidget_Commited'.tr}: '),
+                                    Text(info.commitedSize),
+                                  ],
+                                ),
+                                const SizedBox(),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('${'HomePage_RamWidget_Cached'.tr}: '),
+                                    Text(info.cachedSize),
+                                  ],
+                                ),
                               ]),
                             ],
                           ),
-                          const SizedBox(height: 15),
-                          Row(
-                            children: [
-                              const Spacer(),
-                              Tooltip(
-                                message: '${'HomePage_UpdatedAt'.tr}: ${info.requestTime} (${info.requestId})',
-                                child: const Icon(Icons.info),
-                              ),
-                            ],
-                          ),
+                          WidgetInfoTime(requestTime: info.requestTime, requestId: info.requestId),
                         ],
                       );
                     },
                   );
                 case ConnectionState.done:
-                  return waitting;
+                  return const PendingWidget();
               }
             },
           ),

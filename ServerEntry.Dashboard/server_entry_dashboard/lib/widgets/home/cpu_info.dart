@@ -1,8 +1,12 @@
 ﻿import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:server_entry_dashboard/data/api_resolver.dart';
+import 'package:server_entry_dashboard/widgets/home/const/pending_widget.dart';
+import 'package:server_entry_dashboard/widgets/home/utils/percent_processor.dart';
+import 'package:server_entry_dashboard/widgets/widget_info_time.dart';
 
 class CpuInfoWidget extends StatelessWidget {
   @override
@@ -20,7 +24,7 @@ class CpuInfoWidget extends StatelessWidget {
 
       return CpuInfoWidgetData()
         ..name = jsonBody['name']
-        ..usage = jsonBody['usage']
+        ..usage = Random().nextDouble() // jsonBody['usage']
         ..coreCount = jsonBody['coreCount']
         ..frequency = jsonBody['frequency']
         ..requestId = i
@@ -41,29 +45,18 @@ class CpuInfoWidget extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasError) return Text('Error: ${snapshot.error}');
 
-              var waitting = const Padding(
-                padding: EdgeInsets.all(30),
-                child: Center(
-                  child: SizedBox(
-                    width: 200,
-                    height: 200,
-                    child: CircularProgressIndicator.adaptive(),
-                  ),
-                ),
-              );
-
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
-                  return waitting;
+                  return const PendingWidget();
                 case ConnectionState.waiting:
-                  return waitting;
+                  return const PendingWidget();
                 case ConnectionState.active:
                   return FutureBuilder(
                     future: snapshot.data,
                     builder: (context, snapshot) {
                       var info = snapshot.data;
 
-                      if (info == null) return waitting;
+                      if (info == null) return const PendingWidget();
 
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,11 +73,16 @@ class CpuInfoWidget extends StatelessWidget {
                                       child: SizedBox(
                                         width: 80,
                                         height: 80,
-                                        child: CircularProgressIndicator(value: info.usage),
+                                        child: CircularProgressIndicator(
+                                          value: info.usage,
+                                          backgroundColor: const Color.fromARGB(92, 158, 158, 158),
+                                          strokeWidth: 8.0,
+                                          strokeCap: StrokeCap.round,
+                                        ),
                                       ),
                                     ),
                                     Center(
-                                      child: Text('${(info.usage * 100).toStringAsFixed(1)} %'),
+                                      child: Text(info.usage.toProgressString()),
                                     ),
                                   ],
                                 ),
@@ -92,6 +90,7 @@ class CpuInfoWidget extends StatelessWidget {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  Text(info.name, style: const TextStyle(fontSize: 16)),
                                   Text(
                                     '${info.coreCount} ${'HomePage_CpuWidget_PhysicalCore${info.coreCount > 1 ? 's' : ''}Count'.tr}',
                                     style: const TextStyle(fontSize: 16),
@@ -108,24 +107,13 @@ class CpuInfoWidget extends StatelessWidget {
                               )
                             ],
                           ),
-                          const SizedBox(height: 10),
-                          Text(info.name, style: const TextStyle(fontSize: 20)),
-                          const SizedBox(height: 15),
-                          Row(
-                            children: [
-                              const Spacer(),
-                              Tooltip(
-                                message: '${'HomePage_UpdatedAt'.tr}: ${info.requestTime} (${info.requestId})',
-                                child: const Icon(Icons.info),
-                              ),
-                            ],
-                          ),
+                          WidgetInfoTime(requestTime: info.requestTime, requestId: info.requestId),
                         ],
                       );
                     },
                   );
                 case ConnectionState.done:
-                  return waitting;
+                  return const PendingWidget();
               }
             },
           ),

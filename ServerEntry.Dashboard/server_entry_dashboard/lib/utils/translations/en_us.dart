@@ -14,6 +14,7 @@ const Map<String, String> en_us = {
   'HomePage_CpuWidget_PhysicalCoresCount': 'Physical Cores',
   'HomePage_CpuWidget_LogicalCoreCount': 'Logical Core',
   'HomePage_CpuWidget_LogicalCoresCount': 'Logical Cores',
+  'HomePage_RamWidget_Usage': 'Usage',
   'HomePage_RamWidget_Available': 'Available',
   'HomePage_RamWidget_Capacity': 'Capacity',
   'HomePage_RamWidget_Commited': 'Commited',

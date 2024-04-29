@@ -14,6 +14,7 @@ const Map<String, String> zh_cn = {
   'HomePage_CpuWidget_PhysicalCoresCount': '个物理核心',
   'HomePage_CpuWidget_LogicalCoreCount': '个逻辑核心',
   'HomePage_CpuWidget_LogicalCoresCount': '个逻辑核心',
+  'HomePage_RamWidget_Usage': '占用',
   'HomePage_RamWidget_Available': '空闲',
   'HomePage_RamWidget_Capacity': '总共',
   'HomePage_RamWidget_Commited': '已提交',
