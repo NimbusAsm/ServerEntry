@@ -1,5 +1,4 @@
 ﻿import 'dart:convert';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,7 +12,7 @@ class CpuInfoWidget extends StatelessWidget {
   const CpuInfoWidget({super.key});
 
   Stream<Future<CpuInfoWidgetData?>> getDataProvider() {
-    return Stream.periodic(const Duration(seconds: 3), (i) async {
+    return Stream.periodic(const Duration(seconds: 1), (i) async {
       var time = DateTime.now();
 
       var result = await ApiResolver().hardwareStatus().processors(null, range: 'cpu');
@@ -24,7 +23,7 @@ class CpuInfoWidget extends StatelessWidget {
 
       return CpuInfoWidgetData()
         ..name = jsonBody['name']
-        ..usage = Random().nextDouble() // jsonBody['usage']
+        ..usage = jsonBody['usage']
         ..coreCount = jsonBody['coreCount']
         ..frequency = jsonBody['frequency']
         ..requestId = i
