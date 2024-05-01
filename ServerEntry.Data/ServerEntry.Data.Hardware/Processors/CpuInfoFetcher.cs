@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using Common.BasicHelper.Utils.Extensions;
 using ServerEntry.Data.Hardware.Extensions;
+using ServerEntry.Data.Hardware.Services;
 using ServerEntry.Shared.Hardware.Memory.Memories;
 using ServerEntry.Shared.Hardware.Processor.Processors;
 using ServerEntry.Shared.Units;
@@ -45,6 +46,9 @@ public partial class CpuInfoFetcher
             CoreCountRegex().Match(info).WhenSuccess(x => result.CoreCount = int.Parse(ValueAt(x, 1) ?? "-1"));
 
             ThreadCountRegex().Match(info).WhenSuccess(x => result.ThreadCount = int.Parse(ValueAt(x, 1) ?? "-1"));
+
+            if (ServicesManager.CpuUsageMonitor().GetValue(out var v, out var e))
+                result.Usage = (double)v;
 
             if (range.Includes(["all", "percpu"]))
             {
