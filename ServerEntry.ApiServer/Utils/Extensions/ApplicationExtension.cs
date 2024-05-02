@@ -23,4 +23,21 @@ public static class ApplicationExtension
 
         return app;
     }
+
+    public static IApplicationBuilder RedirectStaticFiles(this WebApplication app)
+    {
+        app.Use(async (context, next) =>
+        {
+            if (context.Request.Path.Equals("/"))
+            {
+                context.Request.Path = "/index.html";
+            }
+
+            await next();
+        });
+
+        app.UseStaticFiles();
+
+        return app;
+    }
 }

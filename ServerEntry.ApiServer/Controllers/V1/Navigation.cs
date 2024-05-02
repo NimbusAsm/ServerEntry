@@ -3,7 +3,7 @@
 namespace ServerEntry.ApiServer.Controllers.V1;
 
 [ApiController]
-[Route("/")]
+[Route("Api")]
 public class Navigation(ILogger<Navigation> logger) : ControllerBase
 {
     private readonly ILogger<Navigation> _logger = logger;
