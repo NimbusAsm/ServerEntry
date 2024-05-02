@@ -2,6 +2,24 @@
 
 `ServerEntry` is a set of utils to help you with managing your server.
 
+# Usage
+
+## Docker
+
+```shell
+## Pull docker image
+sudo docker pull nimbusasm/server-entry:latest
+
+## Run docker container
+sudo docker run -d --name server-entry \
+    -p 5111:5111 \
+    nimbusasm/server-entry:latest
+```
+
+## Manually
+
+// ToDo
+
 # Development
 
 ## Requirements
