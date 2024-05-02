@@ -1,14 +1,28 @@
+using ServerEntry.ApiServer.Utils.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AllowAllOrigins();
+
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.WriteIndented = true;
+    })
+    ;
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Even in production environment, provides swagger api document unless user turn it off
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.RedirectStaticFiles();
+
+app.AllowAllOrigins();
 
 app.UseHttpsRedirection();
 

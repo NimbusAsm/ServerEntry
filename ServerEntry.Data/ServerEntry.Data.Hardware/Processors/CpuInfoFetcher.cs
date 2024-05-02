@@ -1,5 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using Common.BasicHelper.Utils.Extensions;
+using ServerEntry.Data.Hardware.Extensions;
+using ServerEntry.Data.Hardware.Services;
 using ServerEntry.Shared.Hardware.Memory.Memories;
 using ServerEntry.Shared.Hardware.Processor.Processors;
 using ServerEntry.Shared.Units;
@@ -12,7 +14,7 @@ public partial class CpuInfoFetcher
 
     public static CpuInfoFetcher Instance => _instance ??= new();
 
-    public CpuInfo Fetch()
+    public CpuInfo Fetch(string range = "all")
     {
         var result = new CpuInfo();
 
@@ -45,73 +47,79 @@ public partial class CpuInfoFetcher
 
             ThreadCountRegex().Match(info).WhenSuccess(x => result.ThreadCount = int.Parse(ValueAt(x, 1) ?? "-1"));
 
-            const string cpuDevicesPath = "/sys/devices/system/cpu";
+            if (ServicesManager.CpuUsageMonitor().GetValue(out var v, out var e))
+                result.Usage = (double)v;
 
-            const string onlineCpusPath = cpuDevicesPath + "/online";
-
-            var onlineCpus = File.ReadAllText(onlineCpusPath).Split(',').Select(
-                x => GetItemsFromRange(GetRange(x))
-            ).SelectMany(x => x).Distinct();
-
-            result.OnlineCpus = onlineCpus;
-
-            foreach (var cpuId in onlineCpus)
+            if (range.Includes(["all", "percpu"]))
             {
-                var coreInfo = new CpuCoreInfo();
+                const string cpuDevicesPath = "/sys/devices/system/cpu";
 
-                var infoDirPath = cpuDevicesPath + $"/cpu{cpuId}";
+                const string onlineCpusPath = cpuDevicesPath + "/online";
 
-                var cacheDirPath = infoDirPath + $"/cache";
+                var onlineCpus = File.ReadAllText(onlineCpusPath).Split(',').Select(
+                    x => GetItemsFromRange(GetRange(x))
+                ).SelectMany(x => x).Distinct();
 
-                var indexes = new DirectoryInfo(cacheDirPath).GetDirectories()
-                    .Where(x => IndexRegex().IsMatch(x.Name.ToLower()))
-                    .Select(x => x.Name);
+                result.OnlineCpus = onlineCpus;
 
-                foreach (var index in indexes)
+                foreach (var cpuId in onlineCpus)
                 {
-                    var sizeInfoPath = cacheDirPath + $"/{index}/size";
+                    var coreInfo = new CpuCoreInfo();
 
-                    var levelInfoPath = cacheDirPath + $"/{index}/level";
+                    var infoDirPath = cpuDevicesPath + $"/cpu{cpuId}";
 
-                    var size = BinarySize.Parse(File.ReadAllText(sizeInfoPath) + "B");
+                    var cacheDirPath = infoDirPath + $"/cache";
 
-                    var level = int.Parse(File.ReadAllText(levelInfoPath));
+                    var indexes = new DirectoryInfo(cacheDirPath).GetDirectories()
+                        .Where(x => IndexRegex().IsMatch(x.Name.ToLower()))
+                        .Select(x => x.Name);
 
-                    switch (level)
+                    foreach (var index in indexes)
                     {
-                        case 1:
-                            switch (index.Last() - '0')
-                            {
-                                case 0:
-                                    coreInfo.L1DataCacheSize = new CacheInfo()
-                                    {
-                                        Capacity = size,
-                                    };
-                                    break;
-                                case 1:
-                                    coreInfo.L1InstructionCacheSize = new CacheInfo()
-                                    {
-                                        Capacity = size,
-                                    };
-                                    break;
-                            }
-                            break;
-                        case 2:
-                            coreInfo.L2CacheSize = new CacheInfo()
-                            {
-                                Capacity = size,
-                            };
-                            break;
-                        case 3:
-                            coreInfo.L3CacheSize = new CacheInfo()
-                            {
-                                Capacity = size,
-                            };
-                            break;
-                    }
-                }
+                        var sizeInfoPath = cacheDirPath + $"/{index}/size";
 
-                result.CpuCoreInfos = result.CpuCoreInfos.Append(coreInfo);
+                        var levelInfoPath = cacheDirPath + $"/{index}/level";
+
+                        var size = BinarySize.Parse(File.ReadAllText(sizeInfoPath) + "B");
+
+                        var level = int.Parse(File.ReadAllText(levelInfoPath));
+
+                        switch (level)
+                        {
+                            case 1:
+                                switch (index.Last() - '0')
+                                {
+                                    case 0:
+                                        coreInfo.L1DataCacheSize = new CacheInfo()
+                                        {
+                                            Capacity = size,
+                                        };
+                                        break;
+                                    case 1:
+                                        coreInfo.L1InstructionCacheSize = new CacheInfo()
+                                        {
+                                            Capacity = size,
+                                        };
+                                        break;
+                                }
+                                break;
+                            case 2:
+                                coreInfo.L2CacheSize = new CacheInfo()
+                                {
+                                    Capacity = size,
+                                };
+                                break;
+                            case 3:
+                                coreInfo.L3CacheSize = new CacheInfo()
+                                {
+                                    Capacity = size,
+                                };
+                                break;
+                        }
+                    }
+
+                    result.CpuCoreInfos = result.CpuCoreInfos.Append(coreInfo);
+                }
             }
 
             return result;
