@@ -1,11 +1,11 @@
 {
-    "name": "server_entry_dashboard",
-    "short_name": "server_entry_dashboard",
+    "name": "Server Entry Dashboard",
+    "short_name": "Server Entry Dashboard",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Web page dashboard for your servers",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
