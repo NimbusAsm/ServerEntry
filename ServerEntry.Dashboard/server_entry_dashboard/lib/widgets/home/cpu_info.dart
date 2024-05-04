@@ -1,6 +1,7 @@
 ﻿import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:server_entry_dashboard/data/api_resolver.dart';
 import 'package:server_entry_dashboard/widgets/home/const/pending_widget.dart';
@@ -60,7 +61,7 @@ class CpuInfoWidget extends StatelessWidget {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
+                          Wrap(
                             children: [
                               Container(
                                 width: 80,
@@ -89,6 +90,7 @@ class CpuInfoWidget extends StatelessWidget {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  const SizedBox(height: 14),
                                   Text(info.name, style: const TextStyle(fontSize: 16)),
                                   Text(
                                     '${info.coreCount} ${'HomePage_CpuWidget_PhysicalCore${info.coreCount > 1 ? 's' : ''}Count'.tr}',
