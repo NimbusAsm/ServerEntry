@@ -37,11 +37,19 @@ public class CpuUsageMonitor : MonitorBase
 
                 usage = 1 - idleCpuDiff * 1.0 / (totalCpuDiff * 1.0);
 
-                cpuUsageHistory.Add(DateTime.Now, usage);
+                RecordValue(usage);
 
                 lastCpuStats = endCpuStats;
             }
         });
+
+        void RecordValue(double value)
+        {
+            // ToDo: Move hard-coded item limits to configuration
+            if (cpuUsageHistory.Count > 30) cpuUsageHistory.Remove(cpuUsageHistory.ElementAt(0).Key);
+
+            cpuUsageHistory.Add(DateTime.Now, value);
+        }
 
         static (long idle, long total) GetCpuStats()
         {
