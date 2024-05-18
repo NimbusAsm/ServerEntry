@@ -38,6 +38,12 @@ public class MonitorBase : IMonitorService
         return false;
     }
 
+    public virtual Dictionary<DateTime, object> GetValuesHistory(out Exception? exception)
+    {
+        exception = null;
+        return [];
+    }
+
     public virtual string GetName() { throw new NotImplementedException(); }
 
     public virtual void OnInitialize() { }

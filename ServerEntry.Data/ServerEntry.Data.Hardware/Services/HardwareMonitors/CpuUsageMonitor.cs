@@ -12,6 +12,8 @@ public class CpuUsageMonitor : MonitorBase
 
     private (long idle, long total) lastCpuStats;
 
+    private readonly Dictionary<DateTime, object> cpuUsageHistory = [];
+
     public override string GetName() => typeof(CpuUsageMonitor).Name;
 
     public override void OnInitialize()
@@ -34,6 +36,8 @@ public class CpuUsageMonitor : MonitorBase
                 var idleCpuDiff = endCpuStats.idle - lastCpuStats.idle;
 
                 usage = 1 - idleCpuDiff * 1.0 / (totalCpuDiff * 1.0);
+
+                cpuUsageHistory.Add(DateTime.Now, usage);
 
                 lastCpuStats = endCpuStats;
             }
@@ -76,5 +80,11 @@ public class CpuUsageMonitor : MonitorBase
         exception = null;
 
         return true;
+    }
+
+    public override Dictionary<DateTime, object> GetValuesHistory(out Exception? exception)
+    {
+        exception = null;
+        return cpuUsageHistory;
     }
 }
