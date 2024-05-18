@@ -14,5 +14,5 @@ public interface IMonitorService : IDisposable
 
     bool GetValue(out object result, out Exception? exception);
 
-    Dictionary<DateTime, object> GetValuesHistory(out Exception? exception);
+    SortedDictionary<DateTime, object> GetValuesHistory(out Exception? exception);
 }

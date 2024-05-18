@@ -38,7 +38,7 @@ public class MonitorBase : IMonitorService
         return false;
     }
 
-    public virtual Dictionary<DateTime, object> GetValuesHistory(out Exception? exception)
+    public virtual SortedDictionary<DateTime, object> GetValuesHistory(out Exception? exception)
     {
         exception = null;
         return [];

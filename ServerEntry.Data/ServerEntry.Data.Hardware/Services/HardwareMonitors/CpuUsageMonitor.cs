@@ -1,4 +1,5 @@
-﻿using ServerEntry.Shared.Service;
+﻿using System.Collections.Specialized;
+using ServerEntry.Shared.Service;
 
 namespace ServerEntry.Data.Hardware.Services.HardwareMonitors;
 
@@ -12,7 +13,7 @@ public class CpuUsageMonitor : MonitorBase
 
     private (long idle, long total) lastCpuStats;
 
-    private readonly Dictionary<DateTime, object> cpuUsageHistory = [];
+    private readonly SortedDictionary<DateTime, object> cpuUsageHistory = [];
 
     public override string GetName() => typeof(CpuUsageMonitor).Name;
 
@@ -46,7 +47,7 @@ public class CpuUsageMonitor : MonitorBase
         void RecordValue(double value)
         {
             // ToDo: Move hard-coded item limits to configuration
-            if (cpuUsageHistory.Count > 30) cpuUsageHistory.Remove(cpuUsageHistory.ElementAt(0).Key);
+            if (cpuUsageHistory.Count > 30) cpuUsageHistory.Remove(cpuUsageHistory.Keys.First());
 
             cpuUsageHistory.Add(DateTime.Now, value);
         }
@@ -90,7 +91,7 @@ public class CpuUsageMonitor : MonitorBase
         return true;
     }
 
-    public override Dictionary<DateTime, object> GetValuesHistory(out Exception? exception)
+    public override SortedDictionary<DateTime, object> GetValuesHistory(out Exception? exception)
     {
         exception = null;
         return cpuUsageHistory;
