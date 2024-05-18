@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
         child: const Icon(Icons.edit),
       ),
       body: MasonryGridView.count(
-        itemCount: 11,
+        itemCount: 8,
         crossAxisCount: 4,
         mainAxisSpacing: 0,
         crossAxisSpacing: 0,
@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
           return Container(
             height: (index % 5 + 1) * 100 + random.nextInt(100) * 1.0,
             margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-            child: InfoCard(title: 'Test Widget', value: 'Index: $index'),
+            child: InfoCard(title: 'Test Widget', value: 'Index: ${index + 1}'),
           );
         },
       ),

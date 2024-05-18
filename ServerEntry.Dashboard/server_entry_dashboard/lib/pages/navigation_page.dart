@@ -42,6 +42,17 @@ class _NavigationPageState extends State<NavigationPage> {
               onDestinationSelected: (index) => app.navPageTo(index),
               useIndicator: true,
               labelType: NavigationRailLabelType.all,
+              leading: Padding(
+                padding: const EdgeInsets.all(10),
+                child: SizedBox(
+                  width: 64,
+                  height: 64,
+                  child: IconButton(
+                    icon: Image.asset('assets/icon@128.png'),
+                    onPressed: () {},
+                  ),
+                ),
+              ),
               trailing: Column(
                 children: [
                   const SizedBox(height: 20),
