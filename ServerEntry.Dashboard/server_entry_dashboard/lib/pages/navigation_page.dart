@@ -1,9 +1,9 @@
 ﻿import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
+// import 'package:get/get_core/get_core.dart';
 import 'package:server_entry_dashboard/app.dart';
-import 'package:server_entry_dashboard/pages/debug_page.dart';
+// import 'package:server_entry_dashboard/pages/debug_page.dart';
 import 'package:server_entry_dashboard/pages/home_page.dart';
 import 'package:server_entry_dashboard/pages/routes/developing_page.dart';
 import 'package:server_entry_dashboard/pages/routes/pages.dart';
@@ -57,7 +57,8 @@ class _NavigationPageState extends State<NavigationPage> {
                 children: [
                   const SizedBox(height: 20),
                   IconButton(
-                    onPressed: () => Get.toNamed(DebugPage.getRoute()),
+                    // onPressed: () => Get.toNamed(DebugPage.getRoute()),
+                    onPressed: () {},
                     icon: const Icon(Icons.bug_report),
                   ),
                   const SizedBox(height: 5),
