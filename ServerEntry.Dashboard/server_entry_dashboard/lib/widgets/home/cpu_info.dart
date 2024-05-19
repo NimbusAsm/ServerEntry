@@ -225,10 +225,17 @@ class CpuInfoWidgetData {
 
   int getMaxUsageHistoryNested() {
     var maxOne = 0.0;
-    usageHistory.values.skip(usageHistory.length - 5).take(5).forEach((element) {
-      var value = double.parse(element.toString()) * 100;
-      if (value > maxOne) maxOne = value;
-    });
+    if (usageHistory.length < 5) {
+      for (var element in usageHistory.values) {
+        var value = double.parse(element.toString()) * 100;
+        if (value > maxOne) maxOne = value;
+      }
+    } else {
+      usageHistory.values.skip(usageHistory.length - 5).take(5).forEach((element) {
+        var value = double.parse(element.toString()) * 100;
+        if (value > maxOne) maxOne = value;
+      });
+    }
     if (maxOne <= 10) {
       return 10;
     } else if (maxOne <= 20) {
@@ -247,6 +254,13 @@ class CpuInfoWidgetData {
   List<FlSpot> getUsageHistorySpots() {
     var result = <FlSpot>[];
     var index = 0;
+    if (usageHistory.length < 5) {
+      for (var element in usageHistory.values) {
+        result.add(FlSpot(index * 1.0, double.parse(element.toString()) * 100));
+        index += 1;
+      }
+      return result;
+    }
     usageHistory.values.skip(usageHistory.length - 5).take(5).forEach((element) {
       result.add(FlSpot(index * 1.0, double.parse(element.toString()) * 100));
       index += 1;
