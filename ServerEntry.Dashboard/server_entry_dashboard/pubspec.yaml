@@ -2,7 +2,7 @@ name: server_entry_dashboard
 description: "Web page dashboard for your servers"
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 0.0.2+2
+version: 0.0.2+2-fix
 
 environment:
   sdk: ">=3.3.3 <4.0.0"
