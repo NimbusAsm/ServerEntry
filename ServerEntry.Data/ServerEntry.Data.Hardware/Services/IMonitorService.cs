@@ -13,4 +13,6 @@ public interface IMonitorService : IDisposable
     void StopMonitoring();
 
     bool GetValue(out object result, out Exception? exception);
+
+    SortedDictionary<DateTime, object> GetValuesHistory(out Exception? exception);
 }

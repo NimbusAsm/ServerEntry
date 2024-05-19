@@ -1,4 +1,5 @@
-﻿using ServerEntry.Shared.Service;
+﻿using System.Collections.Specialized;
+using ServerEntry.Shared.Service;
 
 namespace ServerEntry.Data.Hardware.Services.HardwareMonitors;
 
@@ -11,6 +12,8 @@ public class CpuUsageMonitor : MonitorBase
     private double usage = -1;
 
     private (long idle, long total) lastCpuStats;
+
+    private readonly SortedDictionary<DateTime, object> cpuUsageHistory = [];
 
     public override string GetName() => typeof(CpuUsageMonitor).Name;
 
@@ -35,9 +38,19 @@ public class CpuUsageMonitor : MonitorBase
 
                 usage = 1 - idleCpuDiff * 1.0 / (totalCpuDiff * 1.0);
 
+                RecordValue(usage);
+
                 lastCpuStats = endCpuStats;
             }
         });
+
+        void RecordValue(double value)
+        {
+            // ToDo: Move hard-coded item limits to configuration
+            if (cpuUsageHistory.Count > 30) cpuUsageHistory.Remove(cpuUsageHistory.Keys.First());
+
+            cpuUsageHistory.Add(DateTime.Now, value);
+        }
 
         static (long idle, long total) GetCpuStats()
         {
@@ -76,5 +89,11 @@ public class CpuUsageMonitor : MonitorBase
         exception = null;
 
         return true;
+    }
+
+    public override SortedDictionary<DateTime, object> GetValuesHistory(out Exception? exception)
+    {
+        exception = null;
+        return cpuUsageHistory;
     }
 }

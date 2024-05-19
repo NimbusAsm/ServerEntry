@@ -21,6 +21,12 @@ public class HardwareStatusController(ILogger<HardwareStatusController> logger) 
         return Ok(HardwareStatusProvider.Instance.GetProcessorInfos(range));
     }
 
+    [HttpGet("CpuUsageHistory", Name = nameof(GetCpuUsageHistory))]
+    public IActionResult GetCpuUsageHistory([FromQuery] string? token)
+    {
+        return Ok(HardwareStatusProvider.Instance.GetCpuUsageHistory());
+    }
+
     [HttpGet("Memory", Name = nameof(GetMemoryInfo))]
     public IActionResult GetMemoryInfo([FromQuery] string? token, [FromQuery] string range = "all")
     {

@@ -1,9 +1,9 @@
 ﻿import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
+// import 'package:get/get_core/get_core.dart';
 import 'package:server_entry_dashboard/app.dart';
-import 'package:server_entry_dashboard/pages/debug_page.dart';
+// import 'package:server_entry_dashboard/pages/debug_page.dart';
 import 'package:server_entry_dashboard/pages/home_page.dart';
 import 'package:server_entry_dashboard/pages/routes/developing_page.dart';
 import 'package:server_entry_dashboard/pages/routes/pages.dart';
@@ -42,11 +42,23 @@ class _NavigationPageState extends State<NavigationPage> {
               onDestinationSelected: (index) => app.navPageTo(index),
               useIndicator: true,
               labelType: NavigationRailLabelType.all,
+              leading: Padding(
+                padding: const EdgeInsets.all(10),
+                child: SizedBox(
+                  width: 64,
+                  height: 64,
+                  child: IconButton(
+                    icon: Image.asset('assets/icon@128.png'),
+                    onPressed: () {},
+                  ),
+                ),
+              ),
               trailing: Column(
                 children: [
                   const SizedBox(height: 20),
                   IconButton(
-                    onPressed: () => Get.toNamed(DebugPage.getRoute()),
+                    // onPressed: () => Get.toNamed(DebugPage.getRoute()),
+                    onPressed: () {},
                     icon: const Icon(Icons.bug_report),
                   ),
                   const SizedBox(height: 5),

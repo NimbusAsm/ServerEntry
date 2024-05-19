@@ -39,6 +39,11 @@ class HardwareStatusApiResolver {
     return ApiResolver.get(apiUrl);
   }
 
+  Future<String?> cpuUsageHistory(String? token) {
+    var apiUrl = '${ApiResolver.urlBase(apiConfig)}/HardwareStatus/CpuUsageHistory';
+    return ApiResolver.get(apiUrl);
+  }
+
   Future<String?> memory(String? token, {String range = 'all'}) {
     var apiUrl = '${ApiResolver.urlBase(apiConfig)}/HardwareStatus/Memory?range=$range';
     return ApiResolver.get(apiUrl);

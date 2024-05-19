@@ -1,6 +1,7 @@
 ﻿using ServerEntry.Data.Hardware.Extensions;
 using ServerEntry.Data.Hardware.Memories;
 using ServerEntry.Data.Hardware.Processors;
+using ServerEntry.Data.Hardware.Services;
 using ServerEntry.Shared.Hardware;
 using ServerEntry.Shared.Hardware.Memory;
 using ServerEntry.Shared.Hardware.Processor;
@@ -43,4 +44,6 @@ public class HardwareStatusProvider
 
         return result;
     }
+
+    public SortedDictionary<DateTime, object> GetCpuUsageHistory() => ServicesManager.CpuUsageMonitor().GetValuesHistory(out _);
 }
