@@ -1,5 +1,5 @@
 ﻿class ApiConfig {
-  late String host = 'localhost:5111';
+  late String host = '${Uri.base.host}:5111';
 
   late String apiPath = '/Api/V1';
 
