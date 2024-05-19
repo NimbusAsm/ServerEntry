@@ -34,6 +34,8 @@
 - [ ] Manage your websites
 - [ ] Manage your docker containers
 
+![Screenshot](.github/assets/screenshot.png)
+
 # Usage
 
 ## Docker
