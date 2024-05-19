@@ -3,13 +3,26 @@
 namespace ServerEntry.ApiServer.Controllers.V1;
 
 [ApiController]
-[Route("Api")]
-public class Navigation(ILogger<Navigation> logger) : ControllerBase
+[Route("")]
+public class DashboardNavigation(ILogger<DashboardNavigation> logger) : ControllerBase
 {
-    private readonly ILogger<Navigation> _logger = logger;
+    private readonly ILogger<DashboardNavigation> _logger = logger;
 
-    [HttpGet("", Name = nameof(Redirect))]
-    public IActionResult Redirect()
+    [HttpGet("", Name = nameof(RedirectToDashboard))]
+    public IActionResult RedirectToDashboard()
+    {
+        return Redirect("index.html");
+    }
+}
+
+[ApiController]
+[Route("Api")]
+public class ApiDocNavigation(ILogger<ApiDocNavigation> logger) : ControllerBase
+{
+    private readonly ILogger<ApiDocNavigation> _logger = logger;
+
+    [HttpGet("", Name = nameof(RedirectToSwaggerApiDoc))]
+    public IActionResult RedirectToSwaggerApiDoc()
     {
         return Redirect("swagger/index.html");
     }
