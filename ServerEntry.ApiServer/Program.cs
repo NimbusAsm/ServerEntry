@@ -1,5 +1,8 @@
 using ServerEntry.ApiServer.Utils.Extensions;
 
+if (Directory.Exists("wwwroot") == false)
+    Directory.CreateDirectory("wwwroot");
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AllowAllOrigins();
