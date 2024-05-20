@@ -29,3 +29,4 @@ Set-Location ../..
 
 ## Build Docker
 sudo docker build . -t nimbusasm/server-entry:$Tag
+sudo docker tag nimbusasm/server-entry:$Tag nimbusasm/server-entry:latest
