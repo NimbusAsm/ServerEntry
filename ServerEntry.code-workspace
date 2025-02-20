@@ -1,16 +1,11 @@
 {
-    "folders": [
-        {
-            "path": "."
-        }
-    ],
-    "settings": {
-        "git.autorefresh": true,
-        "dart.lineLength": 200,
-        "[dart]": {
-            "editor.rulers": [
-                200
-            ],
-        }
+  "folders": [
+    {
+      "path": "."
     }
+  ],
+  "settings": {
+    "git.autorefresh": true,
+    "dotnet.defaultSolution": "disable"
+  }
 }
