@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:server_entry_dashboard/app.dart';
 import 'package:server_entry_dashboard/pages/routes/pages.dart';
 import 'package:server_entry_dashboard/widgets/home/cpu_info.dart';
+import 'package:server_entry_dashboard/widgets/home/disk_info.dart';
 import 'package:server_entry_dashboard/widgets/home/ram_info.dart';
 
 class HomePage extends StatefulWidget implements ConstantPage {
@@ -27,6 +28,7 @@ class _HomePageState extends State<HomePage> {
     var widgets = [
       const CpuInfoWidget(),
       const RamInfoWidget(),
+      const DiskInfoWidget(),
     ];
 
     var random = Random();

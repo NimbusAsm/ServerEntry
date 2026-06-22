@@ -46,4 +46,6 @@ public class HardwareStatusProvider
     }
 
     public SortedDictionary<DateTime, object> GetCpuUsageHistory() => ServicesManager.CpuUsageMonitor().GetValuesHistory(out _);
+
+    public SortedDictionary<DateTime, object> GetDiskUsageHistory() => ServicesManager.DiskUsageMonitor().GetValuesHistory(out _);
 }

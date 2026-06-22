@@ -1,3 +1,4 @@
+using ServerEntry.ApiServer.Middleware;
 using ServerEntry.ApiServer.Utils.Extensions;
 
 if (Directory.Exists("wwwroot") == false)
@@ -26,6 +27,9 @@ app.UseSwaggerUI();
 app.UseStaticFiles();
 
 app.AllowAllOrigins();
+
+// API token authentication: required for POST/PUT/DELETE, optional for GET
+app.UseApiTokenAuth();
 
 app.UseHttpsRedirection();
 

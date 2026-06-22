@@ -3,14 +3,14 @@
 )
 
 ## Info
-echo "## You are going to build with tag: $Tag"
+Write-Output "## You are going to build with tag: $Tag"
 
 ## Clear Build Cache
-echo "## Clearing Build Cache"
-rm -rf ServerEntry.Build
+Write-Output "## Clearing Build Cache"
+Remove-Item -rf ServerEntry.Build
 
 ## Build ApiServer
-echo "## Building ApiServer ..."
+Write-Output "## Building ApiServer ..."
 Set-Location ServerEntry.ApiServer
 dotnet publish -p:PublishProfile=Properties/PublishProfiles/linux-x64-single.pubxml
 Set-Location ..
@@ -21,7 +21,7 @@ chmod +x ServerEntry.ApiServer
 Set-Location ../..
 
 ## Build Frontend
-echo "## Building Frontend ..."
+Write-Output "## Building Frontend ..."
 Set-Location ServerEntry.Dashboard/server_entry_dashboard
 flutter build web --release --web-renderer canvaskit --tree-shake-icons --no-web-resources-cdn
 Copy-Item -r build/web ../../ServerEntry.Build/frontend/

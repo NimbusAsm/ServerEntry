@@ -32,4 +32,10 @@ public class HardwareStatusController(ILogger<HardwareStatusController> logger) 
     {
         return Ok(HardwareStatusProvider.Instance.GetMemoryInfos(range));
     }
+
+    [HttpGet("DiskUsageHistory", Name = nameof(GetDiskUsageHistory))]
+    public IActionResult GetDiskUsageHistory([FromQuery] string? token)
+    {
+        return Ok(HardwareStatusProvider.Instance.GetDiskUsageHistory());
+    }
 }

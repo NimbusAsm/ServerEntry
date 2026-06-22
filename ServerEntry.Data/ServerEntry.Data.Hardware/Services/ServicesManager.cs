@@ -47,4 +47,6 @@ public static class ServicesManager
     }
 
     public static IMonitorService CpuUsageMonitor() => QueryOrCreate<CpuUsageMonitor>();
+
+    public static IMonitorService DiskUsageMonitor() => QueryOrCreate<DiskUsageMonitor>();
 }

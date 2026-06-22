@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 // import 'package:get/get_core/get_core.dart';
 import 'package:server_entry_dashboard/app.dart';
 // import 'package:server_entry_dashboard/pages/debug_page.dart';
+import 'package:server_entry_dashboard/pages/docker_page.dart';
 import 'package:server_entry_dashboard/pages/home_page.dart';
 import 'package:server_entry_dashboard/pages/routes/developing_page.dart';
 import 'package:server_entry_dashboard/pages/routes/pages.dart';
@@ -134,7 +135,7 @@ class _NavigationPageState extends State<NavigationPage> {
               children: const [
                 ClipRect(child: HomePage()),
                 ClipRect(child: DevelopingPage(name: 'Websites')),
-                ClipRect(child: DevelopingPage(name: 'Apps')),
+                ClipRect(child: DockerPage()),
                 ClipRect(child: DevelopingPage(name: 'Settings')),
               ],
             ),

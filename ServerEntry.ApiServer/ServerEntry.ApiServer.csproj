@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ServerEntry.Shared\ServerEntry.Shared.csproj" />
     <ProjectReference Include="..\ServerEntry.Data\ServerEntry.Data.DbAdapter\ServerEntry.Data.DbAdapter.csproj" />
+    <ProjectReference Include="..\ServerEntry.Data\ServerEntry.Data.Docker\ServerEntry.Data.Docker.csproj" />
     <ProjectReference Include="..\ServerEntry.Data\ServerEntry.Data.Hardware\ServerEntry.Data.Hardware.csproj" />
   </ItemGroup>
 
